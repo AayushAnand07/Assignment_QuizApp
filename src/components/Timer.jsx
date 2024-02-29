@@ -1,40 +1,42 @@
-import  { useEffect } from "react";
+// Timer.js
 
-const Timer = ({
-  setQNumber,
-  setSeconds,
-  seconds,
-  qNumber,
-  quizQuestions,
-  setDisplayScore,
-}) => {
+import { useContext ,useEffect} from 'react';
+import { QuizContext } from '../context/Quizcontext';
+
+export default function Timer() {
+  const {
+    timeLeft,
+    setTimeLeft,
+    currentQuestion,  
+    setCurrentQuestion,
+    questions,
+    
+  } = useContext(QuizContext);
+
   useEffect(() => {
-    let interval = null;
-    interval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds((seconds) => seconds - 1);
-      }
+    const interval = setInterval(() => {
+      if(timeLeft > 0) {
+        setTimeLeft(prev => prev - 1); 
+      } else {
+        
+        if(currentQuestion + 1 < questions.length) {
 
-      if (seconds === 0) {
-        if (qNumber < quizQuestions.length - 1) {
-          setQNumber((qNumber) => qNumber + 1);
-          setSeconds(20);
+           setCurrentQuestion(prev => prev + 1);  
+
+           setTimeLeft(20); // reset timer
+          
         } else {
-          setDisplayScore(true);
+        
+          clearInterval(interval); 
         }
       }
     }, 1000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [seconds]);
+    return () => clearInterval(interval);
+
+  }, [timeLeft]); 
 
   return (
-    <h5 className="time">
-      Time Left - 00 : {seconds < 10 ? `0${seconds}` : seconds}
-    </h5>
+    <h5 className="time">Time: {timeLeft} sec</h5>
   );
-};
-
-export default Timer;
+}

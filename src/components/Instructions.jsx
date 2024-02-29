@@ -1,9 +1,12 @@
-import React from "react";
+import {useContext}from "react";
 import { useNavigate } from "react-router-dom";
+import { QuizContext } from "../context/Quizcontext";
 
-const Instructions = ({ setStartTimer, name }) => {
+const Instructions = () => {
   const navigate = useNavigate();
 
+  const {name} = useContext(QuizContext);
+  const{setStartTimer}= useContext(QuizContext)
   const startQuiz = () => {
     navigate("/quiz");
     setStartTimer(true);

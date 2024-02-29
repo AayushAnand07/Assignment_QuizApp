@@ -1,8 +1,11 @@
-import{ useState } from "react";
+import{ useState ,useContext} from "react";
 import { useNavigate } from "react-router-dom";
+import { QuizContext } from "../context/Quizcontext";
 
-const Home = ({ setName, name }) => {
+const Home = () => {
   const [error, setError] = useState(false);
+  const { setName } = useContext(QuizContext);
+  const { name } = useContext(QuizContext);
   const navigate = useNavigate();
 
   
