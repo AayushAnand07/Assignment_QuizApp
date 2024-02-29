@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import{ useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = ({ setName, name }) => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-  //onclick of start button ====> Go to instructions page
+  
   const start = () => {
     if (name === "") {
       setError(true);

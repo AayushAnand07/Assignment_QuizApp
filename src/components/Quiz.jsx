@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { quizQuestions } from "../QuizData/quizdata";
 import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
